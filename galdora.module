@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * galdora.module
+ */
+
+/**
+ * Implements hook_form_islandora_solr_simple_search_form_alter().
+ */
+function galdora_form_islandora_solr_simple_search_form_alter(&$form, &$form_state, $form_id) {
+  unset($form['simple']['islandora_simple_search_query']['#title']);
+}
