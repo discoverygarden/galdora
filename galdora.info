@@ -1,0 +1,6 @@
+name = Galdora
+description = "Custom Islandora functionality for National University of Ireland, Galway"
+dependencies[] = islandora
+package = Islandora Customizations
+core = 7.x
+version = 7.x-dev

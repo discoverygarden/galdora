@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * galdora.module
+ */
+
+function galdora_form_islandora_solr_simple_search_form_alter(&$form, &$form_state, $form_id) {
+  $form['simple']['islandora_simple_search_query']['#title'] = '';
+}
