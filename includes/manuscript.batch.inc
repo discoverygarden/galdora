@@ -42,17 +42,19 @@ EOQ;
             '@pid' => $townland_object->id,
           )), 'error');
         }
-        $info = pathinfo(trim($townland_object['OBJ']->label));
-        $images = $this->findImages($info['filename']);
-        $pages = islandora_paged_content_get_pages($townland_object);
-        $sequence = count($pages);
-        $namespace = $this->determineNamespace($townland_object);
-        foreach ($images as $image) {
-          $sequence = $sequence + 1;
-          $page = new GaldoraManuscriptBatchPageObject($this->connection, $townland_object->id, $sequence, $image, $this->parameters);
-          $page->id = $this->connection->repository->getNextIdentifier($namespace);
-          $page->addRelationships();
-          $this->addToDatabase($page, array());
+        else {
+          $info = pathinfo(trim($townland_object['OBJ']->label));
+          $images = $this->findImages($info['filename']);
+          $pages = islandora_paged_content_get_pages($townland_object);
+          $sequence = count($pages);
+          $namespace = $this->determineNamespace($townland_object);
+          foreach ($images as $image) {
+            $sequence = $sequence + 1;
+            $page = new GaldoraManuscriptBatchPageObject($this->connection, $townland_object->id, $sequence, $image, $this->parameters);
+            $page->id = $this->connection->repository->getNextIdentifier($namespace);
+            $page->addRelationships();
+            $this->addToDatabase($page, array());
+          }
         }
       }
     }
@@ -114,7 +116,7 @@ EOQ;
     if (count($image_directories) > 1) {
       drush_log(dt('Found more than one match for @label, not processing.', array(
         '@label' => $image_label,
-      )));
+      )), 'error');
     }
     else {
       $directory = reset($image_directories);
