@@ -113,8 +113,8 @@ EOQ;
     $image_directories = $this->findImageDirectory($this->parameters['townlands_directory'], "/$image_label/i");
     // Should only be one match, if there's more than one log it and do nothing.
     $images = array();
-    if (count($image_directories) > 1) {
-      drush_log(dt('Found more than one match for @label, not processing.', array(
+    if (count($image_directories) != 1) {
+      drush_log(dt('Found more than one match, or no match, for @label, not processing.', array(
         '@label' => $image_label,
       )), 'error');
     }
